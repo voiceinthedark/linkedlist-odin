@@ -1,0 +1,21 @@
+import LinkedList from "./linkedlist.js";
+
+const ll = new LinkedList();
+
+ll.append(3)
+ll.append(5)
+
+console.log(`linked list size: ${ll.size}`) // 2
+console.log(`current node: ${ll.currentNode.value}`) // 5
+console.log(`head node: ${ll.head.value}`) // 3
+console.log(`tail node: ${ll.tail.value}`) // 5
+console.log(`head.next ${ll.head.nextNode}`) // currentNode/tail TODO
+console.log(`tail.next ${ll.tail.nextNode}`) // null
+console.log(`current.next ${ll.currentNode.nextNode}`) // null
+console.log(`tail == current ${ll.tail == ll.currentNode}`); // true
+console.log(`tail === current ${ll.tail === ll.currentNode}`); // true
+
+
+ll.append(7)
+
+console.log(`tail now ${ll.tail.value}`) // 7
