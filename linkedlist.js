@@ -150,14 +150,14 @@ class LinkedList {
    * @param {any} val 
    * @returns {any}
    * */
-  find(val){
-    if(!this.#head){
+  find(val) {
+    if (!this.#head) {
       return null
-    } 
+    }
     let current = this.#head;
-    let i=0;
-    while(current !== null){
-      if(current.value === val){
+    let i = 0;
+    while (current !== null) {
+      if (current.value === val) {
         return i
       }
       current = current.nextNode;
@@ -167,14 +167,97 @@ class LinkedList {
   }
 
   /**
+   * @method to insert a node value at index location
+   * @param {any} value 
+   * @param {number} index
+   * */
+  insertAt(value, index) {
+    // 1. Handle invalid index (negative or beyond the current size)
+    if (index < 0 || index > this.#size) {
+      return; 
+    }
+
+    // 2. Handle insertion at the beginning (index 0) - delegate to prepend
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    // 3. Handle insertion at the end (index === size) - delegate to append
+    if (index === this.#size) {
+      this.append(value);
+      return;
+    }
+
+    // 4. Handle insertion in the middle
+    let current = this.#head;
+    let previous = null;
+    let i = 0;
+
+    // Traverse to the node BEFORE the desired insertion index
+    while (i < index) {
+      previous = current;
+      current = current?.nextNode; // `current` will be the node *at* the index
+      i++;
+    }
+
+    // Create the new node, linking it to the node that was originally at `index`
+    const newNode = new Node(value, current);
+
+    // Link the previous node to the new node
+    if (previous) {
+      previous.nextNode = newNode;
+    }
+
+    this.#size++;
+  }
+
+  /**
+   * @method to remove the node at index
+   * @param {number} index 
+   * @returns {any}
+   * */
+  removeAt(index){
+    if(!this.#head)
+      return null
+
+    if(index < 0 || index > this.#size){
+      return null
+    }
+
+    if(index === 0){
+      const prevNode = this.#head
+      this.#head = this.#head.nextNode;
+      this.#size--
+      return prevNode.value;
+    }
+
+    if(index > 0){
+      // get the previous to last node
+      let current = this.#head
+      let previous = null;
+      let i = 0
+      while(i < index){
+        previous = current;
+        current = current.nextNode;
+        i++
+      }
+      previous.nextNode = current.nextNode;
+      this.#size--
+      return current.value;
+    }
+
+  }
+
+  /**
    * @method to return a string representation of the linked list
    * */
-  toString(){
-    if(!this.#head)
+  toString() {
+    if (!this.#head)
       return 'null'
     let current = this.#head;
     let str = '';
-    while(current !== null){
+    while (current !== null) {
       str += `( ${current.value} ) -> `
       current = current.nextNode;
     }

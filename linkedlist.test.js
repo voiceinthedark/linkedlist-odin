@@ -210,4 +210,65 @@ console.log('--- Running LinkedList Tests ---');
   console.log('toString tests passed')
 })();
 
+// Test insertAt method
+(function testInsertAt(){
+  console.log('\nTesting insert at method...')
+
+  const list = new LinkedList();
+  list.append('apple')
+  list.append('banana');
+  list.append('orange');
+
+  list.insertAt('mango', 1)
+
+  assert(list.size === 4, 'insertAt: list size should be 4')
+  assert(list.head.nextNode.value === 'mango', 'insertAt: nextnode after the head should return "mango"')
+  assert(list.contains('mango') === true, 'insertAt: Contains should return true')
+  assert(list.find('mango') === 1, 'insertAt: find should return an index of 1')
+
+  console.log('insertAt tests passed')
+})();
+
+// test removeAt method
+(function testRemoveAt(){
+  console.log('\nTesting removeAt method...')
+
+  const list = new LinkedList();
+  list.append('apple')
+  list.append('banana');
+  list.append('orange');
+
+
+  assert(list.removeAt(1) === 'banana', 'removeAt: should remove the banana value')
+  assert(list.size === 2, "removeAt: size should be 2")
+  assert(list.head.nextNode.value === 'orange', 'removeAt: next node should be orange')
+
+  // test on empty list
+  const emptyList = new LinkedList()
+  assert(emptyList.removeAt(3) === null, 'removeAt: nothing to remove from empty list, returns null')
+
+  // test remove at head
+  const listHead = new LinkedList();
+  listHead.append(1)
+  listHead.append(4)
+  listHead.append(5)
+
+  assert(listHead.removeAt(0) === 1, 'removeAt: should remove the head and returns 1')
+  assert(listHead.size === 2)
+  assert(listHead.toString() === `( 4 ) -> ( 5 ) -> null`, 'removeAt: toString does not match')
+
+  // test remove at the end
+  const listTail = new LinkedList()
+  listTail.append(3)
+  listTail.append(5)
+  listTail.append(6)
+  listTail.append(9)
+
+  assert(listTail.removeAt(3) === 9, 'removeAt: should return 9')
+  assert(listTail.size === 3, 'removeAt: size should be 3')
+  assert(listTail.toString() === `( 3 ) -> ( 5 ) -> ( 6 ) -> null`, 'removeAt: toString returns invalid')
+
+  console.log('removeAt tests passed')
+})();
+
 console.log('\nAll LinkedList tests completed.');

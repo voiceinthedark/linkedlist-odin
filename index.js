@@ -29,3 +29,11 @@ console.log(`size: ${ll.size}`) // 2
 
 console.log(`contains 7? ${ll.contains(7)}`) // true
 console.log(`contains 777? ${ll.contains(777)}`) // false
+
+ll.insertAt(555, 1);
+console.log(ll.toString())
+
+console.log(ll.removeAt(1)) // 555
+console.log(ll.toString())
+console.log(ll.removeAt(0)) // 3
+console.log(ll.toString()) // ( 5 ) -> null
