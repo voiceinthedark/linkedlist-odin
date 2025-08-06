@@ -7,12 +7,12 @@
 class Node {
   /** @type {any} */
   #value;
-  /** @type {Node | null} */
+  /** @type {Node | null | undefined} */
   #nextNode;
 
   /**@constructor
    * @param {any} val 
-   * @param {Node | null} next 
+   * @param {Node | null | undefined} next 
    * */
   constructor(val, next) {
     this.#value = val ?? null;
